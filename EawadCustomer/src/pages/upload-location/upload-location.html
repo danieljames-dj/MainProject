@@ -1,0 +1,37 @@
+<!--
+  Generated template for the UploadLocation page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+  	<button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Upload Location</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	<ion-list>
+
+	  <ion-item>
+	    <p>Image</p>
+	    <div id="img"></div>
+    	<input type="file" accept="image/*" id="imgip" style="visibility: visible;" (change)="readFile(this, 'img')" />
+		<button id="imgbut" style="visibility: hidden;" ion-button outline (click)="removeFile('img');">Remove Photo</button>
+	  </ion-item>
+
+	  <ion-item>
+	    <ion-label floating>Location</ion-label>
+	    <ion-input type="text"></ion-input>
+	  </ion-item>
+
+	</ion-list>
+
+	<button ion-button (click)="updateData();">UPLOAD</button>
+</ion-content>

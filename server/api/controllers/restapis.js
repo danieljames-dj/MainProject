@@ -39,3 +39,52 @@ exports.registerUser = function(req, res) {
     }
   });
 };
+
+exports.addItem = function(req, res) {
+  connection.query('select max(itemID) from Items', function(err, rows) {
+    var uid = 1;
+    if (!err) {
+      if (rows.length > 0) {
+        if (rows[0]['max(itemID)'] != null)
+          uid = rows[0]['max(itemID)'] + 1;
+      }
+    }
+    connection.query('insert into Items values(' + uid.toString() + ',\'' + req.body.itemName + '\',' + req.body.rate + ')', function(err, rows) {
+      if (!err) {
+        res.json({
+          success: true
+        });
+      }
+    });
+  });
+};
+
+exports.editItem = function(req, res) {
+  connection.query('update Items set itemName = \'' + req.body.itemName + '\', rate = ' + req.body.rate + ' where itemID = ' + req.body.itemID, function(err, rows) {
+    if (!err) {
+      res.json({
+        success: true
+      });
+    }
+  });
+};
+
+exports.deleteItem = function(req, res) {
+  connection.query('delete from Items where itemID = ' + req.body.itemID, function(err, rows) {
+    if (!err) {
+      res.json({
+        success: true
+      });
+    }
+  });
+};
+
+exports.getItems = function(req, res) {
+  connection.query('select * from Items', function(err, rows) {
+    if (!err) {
+      res.json({
+        rows: rows
+      });
+    }
+  });
+};

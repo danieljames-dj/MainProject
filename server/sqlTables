@@ -5,3 +5,9 @@ create table Users(
 	contact varchar(11),
 	jDate date
 );
+
+create table Items(
+	itemID int,
+	itemName varchar(20),
+	rate double
+);
