@@ -11,6 +11,7 @@ import { Signup } from '../pages/signup/signup';
 
 import { AngularFire } from 'angularfire2';
 import { AuthData } from '../providers/auth-data';
+import { Global } from '../services/global/global';
 
 @Component({
   templateUrl: 'app.html'

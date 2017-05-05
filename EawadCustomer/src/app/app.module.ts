@@ -10,6 +10,9 @@ import { ResetPassword } from '../pages/reset-password/reset-password';
 import { Signup } from '../pages/signup/signup';
 
 import { AuthData } from '../providers/auth-data';
+import { HttpModule } from '@angular/http';
+import { ApiService } from '../providers/api-service';
+import { Global } from '../services/global/global';
 
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2'
 
@@ -41,6 +44,7 @@ const myFirebaseAuthConfig = {
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig, myFirebaseAuthConfig)
   ],
@@ -57,7 +61,8 @@ const myFirebaseAuthConfig = {
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AuthData
+    ApiService, AuthData,
+    Global
   ]
 })
 export class AppModule {}
