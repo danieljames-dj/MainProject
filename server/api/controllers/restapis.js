@@ -167,9 +167,9 @@ exports.getEventsUser = function(req, res) {
 
 exports.updateEvents = function(req, res) {
   if (req.body.stat == 0) {
-    connection.query('delete from attendees where evID = ' + req.body.evID + ' and uid = \'' + req.body.uid + '\'');
+    connection.query('delete from Attendees where evID = ' + req.body.evID + ' and uid = \'' + req.body.uid + '\'');
   } else {
-    connection.query('insert into attendees values (' + req.body.evID + ',\'' + req.body.uid + '\')');
+    connection.query('insert into Attendees values (' + req.body.evID + ',\'' + req.body.uid + '\')');
   }
 };
 
@@ -185,7 +185,7 @@ exports.getEmployees = function(req, res) {
 
 exports.getImageList = function(req, res) {
   var fs = require("fs");
-  connection.query('select us.name, up.fileID, up.lat, up.lng from users us, uploads up where us.uid = up.uid', function(err, rows) {
+  connection.query('select us.name, up.fileID, up.lat, up.lng from Users us, Uploads up where us.uid = up.uid', function(err, rows) {
     if (!err) {
       var read = function(rows, i) {
         fs.readFile("./pics/" + rows[i].fileID.toString(), 'utf8', function(err, data) {
@@ -271,7 +271,7 @@ exports.getPickupDetailsUser = function(req, res) {
   console.log(req.body);
   connection.query('select * from Transactions where status = 0 and uid = \'' + req.body.uid + '\'', function(err, rows) {
     if (rows.length > 0) {
-      connection.query('select e.name as ename,e.contact as econ,u.name as uname,u.contact as ucon,t.amt,t.lat,t.lng from employees e,users u,transactions t where t.uid=u.uid and t.eid=e.eid and t.status=0 and u.uid = \'' + req.body.uid + '\'', function(err, rows) {
+      connection.query('select e.name as ename,e.contact as econ,u.name as uname,u.contact as ucon,t.amt,t.lat,t.lng from Employees e,Users u,Transactions t where t.uid=u.uid and t.eid=e.eid and t.status=0 and u.uid = \'' + req.body.uid + '\'', function(err, rows) {
         console.log(rows);
         res.json({
           success: true,
@@ -290,7 +290,7 @@ exports.getPickupDetailsEmployee = function(req, res) {
   console.log(req.body);
   connection.query('select * from Transactions where status = 0 and eid = \'' + req.body.eid + '\'', function(err, rows) {
     if (rows.length > 0) {
-      connection.query('select e.name as ename,e.contact as econ,u.name as uname,u.contact as ucon,t.amt,t.lat,t.lng from employees e,users u,transactions t where t.uid=u.uid and t.eid=e.eid and t.status=0 and e.eid = \'' + req.body.eid + '\'', function(err, rows) {
+      connection.query('select e.name as ename,e.contact as econ,u.name as uname,u.contact as ucon,t.amt,t.lat,t.lng from Employees e,Users u,Transactions t where t.uid=u.uid and t.eid=e.eid and t.status=0 and e.eid = \'' + req.body.eid + '\'', function(err, rows) {
         console.log(rows);
         res.json({
           success: true,
@@ -313,7 +313,7 @@ exports.cancelPickup = function(req, res) {
           success: true
         });
         console.log(rows[0]);
-        connection.query('update Empstat set status = 1 where status = 0 and eid = \'' + rows[0].eid + '\'');
+        connection.query('update EmpStat set status = 1 where status = 0 and eid = \'' + rows[0].eid + '\'');
       });
     } else {
       res.json({
@@ -326,7 +326,7 @@ exports.cancelPickup = function(req, res) {
 exports.finishPickup = function(req, res) {
   console.log(req.body);
   connection.query('update Transactions set status = 1, amt = ' + req.body.amt.toString() + ' where status = 0 and eid = \'' + req.body.eid + '\'', function(err, rows) {
-    connection.query('delete from Empstat where eid = \'' + req.body.eid + '\'', function(err, rows) {
+    connection.query('delete from EmpStat where eid = \'' + req.body.eid + '\'', function(err, rows) {
       res.json({
         success:true
       });

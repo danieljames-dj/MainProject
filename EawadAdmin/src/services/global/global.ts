@@ -6,5 +6,5 @@ export class Global {
   public itemPageId;
   public itemName;
   public rate;
-  public apiUrl = 'http://127.0.0.1:8081/';
+  public apiUrl = 'http://52.34.39.20:8081/';
 }

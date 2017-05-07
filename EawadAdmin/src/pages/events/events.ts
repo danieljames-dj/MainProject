@@ -17,7 +17,7 @@ export class Events {
 
 	items: [{}];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public global: Global) {
   	this.items = [{itemID:12,itemName:"AC",rate:"23"}];
   }
 
