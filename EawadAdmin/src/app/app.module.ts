@@ -9,6 +9,7 @@ import { Login } from '../pages/login/login';
 import { ResetPassword } from '../pages/reset-password/reset-password';
 import { Signup } from '../pages/signup/signup';
 import { MyProfile } from '../pages/my-profile/my-profile';
+import { TariffRates } from '../pages/tariff-rates/tariff-rates';
 
 import { AuthData } from '../providers/auth-data';
 import { HttpModule } from '@angular/http';
@@ -42,7 +43,8 @@ const myFirebaseAuthConfig = {
     Login,
     ResetPassword,
     Signup,
-    MyProfile
+    MyProfile,
+    TariffRates
   ],
   imports: [
     BrowserModule,
@@ -58,7 +60,8 @@ const myFirebaseAuthConfig = {
     Login,
     ResetPassword,
     Signup,
-    MyProfile
+    MyProfile,
+    TariffRates
   ],
   providers: [
     StatusBar,

@@ -7,12 +7,22 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>tariffRates</ion-title>
+  	<button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Image Uploads</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+  <ion-list>
+    <ion-item *ngFor="let key of items">
+      <img src={{key.image}}>
+      <h2>{{key.name}}</h2>
+      <h3>Latitude: {{key.lat}}</h3>
+      <h3>Longitude: {{key.lng}}</h3>
+    </ion-item>
+  </ion-list>
 </ion-content>

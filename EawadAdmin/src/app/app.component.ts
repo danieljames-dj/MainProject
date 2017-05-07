@@ -9,6 +9,7 @@ import { Login } from '../pages/login/login';
 import { ResetPassword } from '../pages/reset-password/reset-password';
 import { Signup } from '../pages/signup/signup';
 import { MyProfile } from '../pages/my-profile/my-profile';
+import { TariffRates } from '../pages/tariff-rates/tariff-rates';
 
 import { AngularFire } from 'angularfire2';
 import { AuthData } from '../providers/auth-data';
@@ -39,7 +40,8 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Employees', component: HomePage },
-      { title: 'Items', component: ListPage }
+      { title: 'Items', component: ListPage },
+      { title: 'Image Uploads', component: TariffRates }
     ];
 
   }

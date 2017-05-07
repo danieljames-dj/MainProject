@@ -8,6 +8,7 @@ import { Signup } from '../signup/signup';
 import { ResetPassword } from '../reset-password/reset-password';
 import { CountForm } from '../count-form/count-form';
 import { Storage } from '@ionic/storage';
+import { Global } from '../../services/global/global';
 
 /**
  * Generated class for the Login page.
@@ -26,7 +27,7 @@ export class Login {
 
   constructor(public navCtrl: NavController, public authData: AuthData, 
     public formBuilder: FormBuilder, public alertCtrl: AlertController,
-    public loadingCtrl: LoadingController) {
+    public loadingCtrl: LoadingController, public global: Global) {
 
       this.loginForm = formBuilder.group({
         email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
@@ -39,9 +40,32 @@ export class Login {
       	alert("Invalid Values")
         console.log(this.loginForm.value);
       } else {
+        var nav = this.navCtrl;
+        var global = this.global;
+        var email = this.loginForm.value.email;
+        var authDataCache = this.authData;
+        this.loading = this.loadingCtrl.create({
+          dismissOnPageChange: true,
+        });
+        var loading = this.loading;
         this.authData.loginUser(this.loginForm.value.email, this.loginForm.value.password)
         .then( authData => {
-          this.navCtrl.setRoot(HomePage);
+          var xhttp = new XMLHttpRequest();
+          xhttp.open("POST", global.apiUrl + 'approvedEmployee', true);
+          xhttp.onload = function() {
+            var json = JSON.parse(xhttp.responseText);
+            if (json.success)
+              nav.setRoot(HomePage);
+            else {
+              authDataCache.logoutUser().then( authData => {
+                // loading.dismiss();
+                alert("Waiting for approval");
+                nav.setRoot(nav.getActive().component);
+              });
+            }
+          }
+          xhttp.setRequestHeader('Content-Type', 'application/json');
+          xhttp.send('{"email":"' + email + '"}');
         }, error => {
           this.loading.dismiss().then( () => {
             let alert = this.alertCtrl.create({
@@ -57,9 +81,7 @@ export class Login {
           });
         });
 
-        this.loading = this.loadingCtrl.create({
-          dismissOnPageChange: true,
-        });
+        
         this.loading.present();
       }
   }

@@ -7,12 +7,26 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>events</ion-title>
+  	<button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Events</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+	<ion-list>
+	  <ion-item *ngFor="let key of items">
+	    <h2>{{key.evDetails}}</h2>
+	    <h3>Latitude: {{key.lat}}</h3>
+	    <h3>Longitude: {{key.lng}}</h3>
+	    <p>Employee Name: {{key.name}}</p>
+	    <p>Employee Contact: {{key.contact}}</p>
+	  </ion-item>
+	</ion-list>
+	<ion-fab right bottom>
+    <button ion-fab (click)="addEvent()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
 </ion-content>

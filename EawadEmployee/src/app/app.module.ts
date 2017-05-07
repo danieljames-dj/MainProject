@@ -8,6 +8,12 @@ import { ListPage } from '../pages/list/list';
 import { Login } from '../pages/login/login';
 import { ResetPassword } from '../pages/reset-password/reset-password';
 import { Signup } from '../pages/signup/signup';
+import { BookPickup } from '../pages/book-pickup/book-pickup';
+import { Events } from '../pages/events/events';
+import { MyProfile } from '../pages/my-profile/my-profile';
+import { TariffRates } from '../pages/tariff-rates/tariff-rates';
+import { UploadLocation } from '../pages/upload-location/upload-location';
+import { GetEstimate } from '../pages/get-estimate/get-estimate';
 
 import { AuthData } from '../providers/auth-data';
 import { HttpModule } from '@angular/http';
@@ -18,14 +24,20 @@ import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2'
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { AgmCoreModule } from 'angular2-google-maps/core';
+import {GoogleMapsAPIWrapper} from 'angular2-google-maps/core/services/google-maps-api-wrapper';
+import { Geolocation } from '@ionic-native/geolocation';
+import { BackgroundGeolocation } from '@ionic-native/background-geolocation';
+import { LocationTracker } from '../providers/location-tracker';
+import { IonicStorageModule } from '@ionic/storage';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBXU9O4oXPrBAypY-Fg1VBk8O9n5DrhYe4",
-  authDomain: "eawad-bab16.firebaseapp.com",
-  databaseURL: "https://eawad-bab16.firebaseio.com",
-  projectId: "eawad-bab16",
-  storageBucket: "eawad-bab16.appspot.com",
-  messagingSenderId: "123170494584"
+  apiKey: "AIzaSyA6LEF-VxJGgcbPfcLTPWmkPQ9fzQa43xs",
+  authDomain: "eawademployee.firebaseapp.com",
+  databaseURL: "https://eawademployee.firebaseio.com",
+  projectId: "eawademployee",
+  storageBucket: "eawademployee.appspot.com",
+  messagingSenderId: "937896767623"
 };
 
 const myFirebaseAuthConfig = {
@@ -40,13 +52,23 @@ const myFirebaseAuthConfig = {
     ListPage,
     Login,
     ResetPassword,
-    Signup
+    Signup,
+    BookPickup,
+    Events,
+    MyProfile,
+    TariffRates,
+    UploadLocation,
+    GetEstimate
   ],
   imports: [
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp(firebaseConfig, myFirebaseAuthConfig)
+    AngularFireModule.initializeApp(firebaseConfig, myFirebaseAuthConfig),
+    IonicStorageModule.forRoot(),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBXU9O4oXPrBAypY-Fg1VBk8O9n5DrhYe4'
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -55,14 +77,24 @@ const myFirebaseAuthConfig = {
     ListPage,
     Login,
     ResetPassword,
-    Signup
+    Signup,
+    BookPickup,
+    Events,
+    MyProfile,
+    TariffRates,
+    UploadLocation,
+    GetEstimate
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ApiService, AuthData,
-    Global
+    Global,
+    GoogleMapsAPIWrapper,
+    Geolocation,
+    BackgroundGeolocation,
+    LocationTracker
   ]
 })
 export class AppModule {}

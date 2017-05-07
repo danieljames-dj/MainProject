@@ -26,12 +26,18 @@
 		<button id="imgbut" style="visibility: hidden;" ion-button outline (click)="removeFile('img');">Remove Photo</button>
 	  </ion-item>
 
-	  <ion-item>
-	    <ion-label floating>Location</ion-label>
-	    <ion-input type="text"></ion-input>
-	  </ion-item>
-
 	</ion-list>
+
+	<sebm-google-map id="map" [latitude]="locationTracker.lat" [longitude]="locationTracker.lng" [zoom]="map.zoom" >
+	    <sebm-google-map-marker [latitude]="locationTracker.lat" [longitude]="locationTracker.lng" [markerDraggable]="map.markerDraggable"
+	    	(dragEnd)="markerDragEnd($event)"
+	    >
+	        <sebm-google-map-info-window>
+	            <strong>My location</strong>
+	        </sebm-google-map-info-window>
+	    </sebm-google-map-marker>
+	</sebm-google-map>
+	<button ion-button secondary (click)="showLoc()">Move to Current Location</button>
 
 	<button ion-button (click)="updateData();">UPLOAD</button>
 </ion-content>

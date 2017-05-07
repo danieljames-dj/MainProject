@@ -8,4 +8,13 @@
 </ion-header>
 
 <ion-content padding>
+	<ion-list>
+	  <ion-item *ngFor="let key of employees">
+	    <h2>{{key.name}}</h2>
+	    <h3>{{key.email}}</h3>
+	    <p>Contact: {{key.contact}}</p>
+	    <p>Salary: {{key.salary}}</p>
+	    <ion-item><ion-toggle [(ngModel)]="key.regStat" (ionChange)="update(key)"></ion-toggle></ion-item>
+	  </ion-item>
+	</ion-list>
 </ion-content>

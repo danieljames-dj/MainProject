@@ -18,21 +18,14 @@
 
 <ion-content padding>
 	<ion-list>
-	  <ion-item>
-	    <h2>Date: Mar 23, Time: 4:00 PM</h2>
-	    <h3>Type: Normal</h3>
-	    <p>Location: Trivandrum, Kerala</p>
-	    <p>Employee Name: Bob</p>
-	    <p>Employee Contact: 9876543210</p>
-	    <button ion-button color="secondary" outline>Unjoin</button>
-	  </ion-item>
-	  <ion-item>
-	    <h2>Date: Mar 21, Time: 2:00 PM</h2>
-	    <h3>Type: Hard</h3>
-	    <p>Location: Kollam, Kerala</p>
-	    <p>Employee Name: Alice</p>
-	    <p>Employee Contact: 9876543210</p>
-	    <button ion-button color="danger" outline>Join</button>
+	  <ion-item *ngFor="let key of items">
+	    <h2>{{key.evDetails}}</h2>
+	    <h3>Latitude: {{key.lat}}</h3>
+	    <h3>Longitude: {{key.lng}}</h3>
+	    <p>Employee Name: {{key.name}}</p>
+	    <p>Employee Contact: {{key.contact}}</p>
+	    <ion-item>
+	    	<ion-toggle [(ngModel)]="key.join" (ionChange)="update(key)"></ion-toggle></ion-item>
 	  </ion-item>
 	</ion-list>
 </ion-content>

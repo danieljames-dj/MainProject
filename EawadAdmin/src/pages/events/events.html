@@ -14,5 +14,13 @@
 
 
 <ion-content padding>
-
+	<ion-list>
+	  <ion-item *ngFor="let key of items">
+	    <h2>{{key.evDetails}}</h2>
+	    <h3>Latitude: {{key.lat}}</h3>
+	    <h3>Longitude: {{key.lng}}</h3>
+	    <p>Employee Name: {{key.name}}</p>
+	    <p>Employee Contact: {{key.contact}}</p>
+	  </ion-item>
+	</ion-list>
 </ion-content>

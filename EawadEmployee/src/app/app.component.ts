@@ -8,6 +8,12 @@ import { ListPage } from '../pages/list/list';
 import { Login } from '../pages/login/login';
 import { ResetPassword } from '../pages/reset-password/reset-password';
 import { Signup } from '../pages/signup/signup';
+import { BookPickup } from '../pages/book-pickup/book-pickup';
+import { Events } from '../pages/events/events';
+import { MyProfile } from '../pages/my-profile/my-profile';
+import { TariffRates } from '../pages/tariff-rates/tariff-rates';
+import { UploadLocation } from '../pages/upload-location/upload-location';
+import { GetEstimate } from '../pages/get-estimate/get-estimate';
 
 import { AngularFire } from 'angularfire2';
 import { AuthData } from '../providers/auth-data';
@@ -38,7 +44,7 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage }
+      { title: 'Events', component: Events }
     ];
 
   }

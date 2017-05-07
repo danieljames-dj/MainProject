@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Book Pickup</ion-title>
+    <ion-title>Get Estimate</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -39,15 +39,5 @@
 	  </ion-card-content>
 
 	</ion-card>
-	<sebm-google-map id="map" [latitude]="locationTracker.lat" [longitude]="locationTracker.lng" [zoom]="map.zoom" >
-	    <sebm-google-map-marker [latitude]="locationTracker.lat" [longitude]="locationTracker.lng" [markerDraggable]="map.markerDraggable"
-	    	(dragEnd)="markerDragEnd($event)"
-	    >
-	        <sebm-google-map-info-window>
-	            <strong>My location</strong>
-	        </sebm-google-map-info-window>
-	    </sebm-google-map-marker>
-	</sebm-google-map>
-	<button ion-button secondary (click)="showLoc()">Move to Current Location</button>
-	<button ion-button secondary (click)="bookPickup()">Book Pickup</button>
+	<button ion-button secondary (click)="bookPickup()">Finish Pickup</button>
 </ion-content>

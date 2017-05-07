@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, LoadingController, AlertController
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthData } from '../../providers/auth-data';
 import { HomePage } from '../home/home';
+import { Login } from '../login/login';
 import { EmailValidator } from '../../validators/email';
 import { CountForm } from '../count-form/count-form';
 import { Storage } from '@ionic/storage';
@@ -32,7 +33,8 @@ export class Signup {
       email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
       password: ['', Validators.compose([Validators.minLength(6), Validators.required])],
       name: [],
-      contact: []
+      contact: [],
+      salary: []
     });
     console.log("GLOBAL", this.global.user);
   }
@@ -50,18 +52,23 @@ export class Signup {
       	console.log(this.signupForm.value.contact, this.signupForm.value.name);
       	var loading = this.loading;
       	var nav = this.nav;
-      	var obj = {"uid": "", "name": "", "email": "", "contact": ""};
+      	var obj = {"uid": "", "name": "", "email": "", "contact": "", "salary": ""};
       	obj.uid = this.global.user.uid;
       	obj.name = this.signupForm.value.name;
       	obj.contact = this.signupForm.value.contact;
       	obj.email = this.signupForm.value.email;
+        obj.salary = this.signupForm.value.salary;
       	var xhttp = new XMLHttpRequest();
-	    xhttp.open("POST", this.global.apiUrl + "registerUser", true);
+        var authData = this.authData;
+	    xhttp.open("POST", this.global.apiUrl + "registerEmployee", true);
 	    xhttp.onload = function() {
 	    	var json = JSON.parse(xhttp.responseText);
 	    	console.log(json);
-	    	loading.dismiss();
-	    	nav.setRoot(HomePage);
+        authData.logoutUser().then( authData => {
+          loading.dismiss();
+          alert("Registered, waiting for approval");
+          nav.setRoot(Login);
+        });
 	    }
 	    xhttp.setRequestHeader('Content-Type', 'application/json');
 	    console.log("PBJJ", obj);

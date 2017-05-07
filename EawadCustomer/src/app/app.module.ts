@@ -24,6 +24,12 @@ import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2'
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { AgmCoreModule } from 'angular2-google-maps/core';
+import {GoogleMapsAPIWrapper} from 'angular2-google-maps/core/services/google-maps-api-wrapper';
+import { Geolocation } from '@ionic-native/geolocation';
+import { BackgroundGeolocation } from '@ionic-native/background-geolocation';
+import { LocationTracker } from '../providers/location-tracker';
+import { IonicStorageModule } from '@ionic/storage';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBXU9O4oXPrBAypY-Fg1VBk8O9n5DrhYe4",
@@ -58,7 +64,11 @@ const myFirebaseAuthConfig = {
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp(firebaseConfig, myFirebaseAuthConfig)
+    AngularFireModule.initializeApp(firebaseConfig, myFirebaseAuthConfig),
+    IonicStorageModule.forRoot(),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBXU9O4oXPrBAypY-Fg1VBk8O9n5DrhYe4'
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -80,7 +90,11 @@ const myFirebaseAuthConfig = {
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ApiService, AuthData,
-    Global
+    Global,
+    GoogleMapsAPIWrapper,
+    Geolocation,
+    BackgroundGeolocation,
+    LocationTracker
   ]
 })
 export class AppModule {}
