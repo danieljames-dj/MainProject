@@ -455,7 +455,7 @@ exports.bookPickup = function(req, res) {
           res.json({
             success: true
           });
-          connection.query('update EmpStat set status = 0 where eid = \'' + rows[lowInd].uid + '\'');
+          connection.query('update EmpStat set status = 0 where eid = \'' + rows[lowInd].eid + '\'');
         });
       });
     }
